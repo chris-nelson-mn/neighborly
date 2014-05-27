@@ -1,4 +1,4 @@
-if Rails.env.production? && ActiveRecord::Base.connection.tables.include?(::Configuration.table_name)
+if Rails.env.production?
   ActionMailer::Base.asset_host = ::Configuration[:host]
   Rails.application.routes.default_url_options = {host: ::Configuration[:host]} 
 else
