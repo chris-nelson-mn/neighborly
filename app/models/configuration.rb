@@ -16,9 +16,10 @@ class Configuration < ActiveRecord::Base
     end
 
     def fetch(key)
-      find_by!(name: key).value
-    rescue ActiveRecord::RecordNotFound
-      raise "No \"#{key}\" configuration defined."
+      # find_by!(name: key).value
+      value = get key
+    # rescue ActiveRecord::RecordNotFound
+    #   raise "No \"#{key}\" configuration defined."
     end
 
     def []= key, value
@@ -27,17 +28,18 @@ class Configuration < ActiveRecord::Base
     private
 
     def get key
-      find_by(name: key).try(:value)
+      ENV[key.to_s.upcase]
+      # find_by(name: key).try(:value)
     end
 
     def set key, value
-      begin
-        find_by_name(key).update_attribute :value, value
-      rescue
-        create!(name: key, value: value)
-      end
-      Rails.cache.write("/configurations/#{key}", value)
-      value
+      # begin
+      #   find_by_name(key).update_attribute :value, value
+      # rescue
+      #   create!(name: key, value: value)
+      # end
+      # Rails.cache.write("/configurations/#{key}", value)
+      # value
     end
 
   end
