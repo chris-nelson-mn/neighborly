@@ -9,7 +9,7 @@ def find_secure_token
   ::Configuration[:secret_token]
 rescue
   # Just to ensure that we can run migrations and create the configurations table
-  nil
+  SecureRandom.hex(64)
 end
 
 def find_secure_key_base
@@ -17,7 +17,7 @@ def find_secure_key_base
   ::Configuration[:secret_key_base]
 rescue
   # Just to ensure that we can run migrations and create the configurations table
-  nil
+  SecureRandom.hex(64)
 end
 
 Neighborly::Application.config.secret_token = find_secure_token
