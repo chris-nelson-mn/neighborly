@@ -38,7 +38,7 @@ Neighborly::Application.routes.draw do
   end
 
   # Channels
-  constraints subdomain: /^(?!www|secure|test|local|staging|neighborly|neighborly-staging)(\w+)/ do
+  constraints subdomain: /^(?!www|secure|test|local|staging|neighborly|neighborly-staging|hoodstarter-n-demo)(\w+)/ do
     namespace :channels, path: '' do
       get '/', to: 'profiles#show', as: :profile
       resources :channels_subscribers, only: [:index, :create, :destroy]
