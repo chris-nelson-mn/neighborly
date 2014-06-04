@@ -62,6 +62,7 @@ RSpec.configure do |config|
       ]
     )
 
+    FakeWeb.allow_net_connect = %r[^https?://127\.0\.0\.1|https?://coveralls\.io]
     FakeWeb.register_uri(:get, "http://vimeo.com/api/v2/video/17298435.json", response: fixture_path('vimeo_default_json_request.txt'))
     FakeWeb.register_uri(:get, "http://vimeo.com/17298435", response: fixture_path('vimeo_default_request.txt'))
     FakeWeb.register_uri(:get, "http://www.youtube.com/watch?v=Brw7bzU_t4c", response: fixture_path("youtube_request.txt"))
@@ -101,8 +102,8 @@ RSpec.configure do |config|
     Geocoder.stub :search => [Geocoder::Result::Base.stub(:new).and_return(result)]
     Geocoder.stub :coordinates => [result.latitude, result.longitude]
 
-    CatarseMailchimp::API.stub(:subscribe).and_return(true)
-    CatarseMailchimp::API.stub(:unsubscribe).and_return(true)
+    User.any_instance.stub(:subscribe_to_newsletter_list).and_return(true)
+    User.any_instance.stub(:unsubscribe_to_newsletter_list).and_return(true)
     Project.any_instance.stub(:store_image_url).and_return('http://www.store_image_url.com')
     ProjectObserver.any_instance.stub(:after_create)
     UserObserver.any_instance.stub(:after_create)

@@ -32,35 +32,34 @@ If you have created another payment engine, please contact us so we can link you
 
 ## How to contribute
 
-Thank you for your interest in helping to advance this project. We are actively working on a public roadmap. Meanwhile, please feel free to [open issues](https://github.com/neighborly/neighborly/issues/new) with your concerns and [fix/implement](https://github.com/neighborly/neighborly/issues) something using pull requests. Probably the better way to do this is commenting on the issue so we can give you the responsibility of it. This will prevent more than one person to contribute with the same change.
+Please see the [CONTRIBUTING](CONTRIBUTING.md) file for information on contributing to Neighbor.ly's development.
 
-### Coding style
+### Style Guide
 
-* We prefer `{foo: 'bar'}` over `{:foo => 'bar'}`
-* We prefer `->(foo){ bar(foo) }` over `lambda{|foo| bar(foo) }`
-
-### Best practices (or how to get your pull request accepted faster)
-
-We use RSpec, Capybara and Jasmine for the tests, and the best practices are:
-* Create one acceptance test for each scenario of the feature you are trying to implement.
-* Create model and controller tests to keep 100% of code coverage at least in the new parts that you are writing.
-* Feel free to add specs to the code that is already in the repository without the proper coverage ;)
-* Try to isolate models from controllers as best as you can.
-* Regard the existing tests for a style guide, we try to use implicit spec subjects and lazy evaluation as often as we can.
+Make sure you follow our [style guide](https://github.com/neighborly/guides/).
 
 ## Quick Installation
 
-**IMPORTANT**: Make sure you have postgresql-contrib ([Aditional Modules](http://www.postgresql.org/docs/9.3/static/contrib.html)) installed on your system.
+To get everything working, you'll need to have these dependencies installed in your system:
+
+* ImageMagick >= 6.3.5
+* PostgreSQL >= 9.3 (with [postgresql-contrib](http://www.postgresql.org/docs/9.3/static/contrib.html))
+* Redis >= 2.4
+* Ruby 2.1.1
+
+Then, you can run the following commands:
 
 ```bash
 $ git clone https://github.com/neighborly/neighborly.git
 $ cd neighborly
-$ cp config/database.sample.yml config/database.yml
-$ vim config/database.yml
-# change username/password and save
-$ bundle install
-$ rake db:create db:migrate db:seed
-$ rails server
+$ ./bin/bootstrap
+$ foreman start
+```
+
+You are now running Neighborly on http://localhost:3000 with sample configuration. If you plan to use it more than just get it running, you should change configuration (check `db/seeds.rb` for examples) and maybe run development seeds:
+
+```bash
+$ rails runner db/development_seeds.rb
 ```
 
 ## Other Repositories

@@ -8,15 +8,6 @@ GIT
       rails (~> 4)
 
 GIT
-  remote: git://github.com/catarse/catarse_mailchimp.git
-  revision: 2ed4f3931dfa292e5c1c62619772f04e41c68629
-  ref: 2ed4f39
-  specs:
-    catarse_mailchimp (0.0.1)
-      mailchimp
-      supermodel
-
-GIT
   remote: git://github.com/josemarluedke/font-icons-rails.git
   revision: e9e43dd325e4e6fe552b362bb8b42a64775833ea
   branch: fix-svgz
@@ -32,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/neighborly/neighborly-admin.git
-  revision: 22a299187526af6b1b73c6fba6babc8776226742
+  revision: f42f5972e6a36f97be674643eb43a8ac4a7920ac
   branch: master
   specs:
     neighborly-admin (1.0.0)
@@ -40,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/neighborly/neighborly-balanced-bankaccount.git
-  revision: b0ed0f4e46cb1b9dfaaa80231ca0bfa7494f0b47
+  revision: 13cada4af31f10dae4c74d2d722ad5b8ab6e397b
   branch: master
   specs:
     neighborly-balanced-bankaccount (1.0.0)
@@ -51,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/neighborly/neighborly-balanced-creditcard.git
-  revision: de9166b4cf5fd66cd8807ba2540269832abbb3d5
+  revision: 04caefe1858b37ab07c8980be8e67dc5df826da2
   branch: master
   specs:
     neighborly-balanced-creditcard (1.1.0)
@@ -61,7 +52,7 @@ GIT
 
 GIT
   remote: git://github.com/neighborly/neighborly-balanced.git
-  revision: fad3584cf671b46dd63423b7e746594034893937
+  revision: b00311fda553a2b6b867628bf3e6162f5aa89114
   branch: master
   specs:
     neighborly-balanced (1.1.0)
@@ -106,8 +97,8 @@ GEM
       redcarpet (~> 3.1)
       rinku (~> 1.5.0)
     awesome_print (1.2.0)
-    balanced (0.8.1)
-      faraday (>= 0.8.6)
+    balanced (0.8.2)
+      faraday (~> 0.8.6)
       faraday_middleware (~> 0.9.0)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
@@ -129,9 +120,11 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    catarse_monkeymail (0.1.3)
+      mailchimp-api (~> 2.0.4)
+      rails (>= 4.0.3)
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    chartkick (1.2.0)
     childprocess (0.5.2)
       ffi (~> 1.0, >= 1.0.11)
     chunky_png (1.3.0)
@@ -222,9 +215,6 @@ GEM
       rack (>= 1.4.5)
     hike (1.2.3)
     htmlentities (4.3.1)
-    httparty (0.13.1)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     httpclient (2.3.4.1)
     i18n (0.6.9)
     inherited_resources (1.4.1)
@@ -256,13 +246,14 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailchimp (0.0.9)
-      httparty
+    mailchimp-api (2.0.4)
+      excon (>= 0.16.0)
+      json (>= 1.7.7)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.3)
-    minitest (5.3.3)
-    multi_json (1.10.0)
+    minitest (5.3.4)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     net-scp (1.1.2)
@@ -351,7 +342,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
-    rake (10.3.1)
+    rake (10.3.2)
     ranked-model (0.4.0)
       activerecord (>= 3.1.12)
     redcarpet (3.1.1)
@@ -433,8 +424,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    supermodel (0.1.4)
-      activemodel (>= 3.0.0.beta)
     temple (0.6.7)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
@@ -493,8 +482,7 @@ DEPENDENCIES
   browser
   capybara (~> 2.2.1)
   carrierwave (~> 0.9.0)
-  catarse_mailchimp!
-  chartkick (= 1.2.0)
+  catarse_monkeymail (~> 0.1.3)
   coffee-rails (~> 4.0.1)
   compass-rails
   coveralls
@@ -546,7 +534,7 @@ DEPENDENCIES
   ranked-model
   remotipart (~> 1.2.1)
   rmagick
-  rspec-rails (~> 2.14.1)
+  rspec-rails (~> 2.14.2)
   sass-rails (~> 4.0.3)
   schema_plus
   selenium-webdriver (~> 2.39.0)

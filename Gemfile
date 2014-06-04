@@ -19,7 +19,6 @@ gem 'state_machine', require: 'state_machine/core', github: 'josemarluedke/state
 gem 'pg'
 gem 'postgres-copy'
 gem 'pg_search'
-
 gem 'schema_plus'
 
 # Payment engines
@@ -32,7 +31,6 @@ gem 'neighborly-admin', github: 'neighborly/neighborly-admin', branch: :master
 
 # Turns every field on a editable one - Admin dependencies
 gem 'best_in_place', github: 'bernat/best_in_place', branch: 'rails-4'
-gem 'chartkick', '1.2.0'
 
 # Decorators
 gem 'draper'
@@ -53,7 +51,7 @@ gem 'ezcrypto'
 gem 'pundit', '~> 0.2.3'
 
 # Email marketing
-gem 'catarse_mailchimp', github: 'catarse/catarse_mailchimp', ref: '2ed4f39'
+gem 'catarse_monkeymail', '~> 0.1.3'
 
 # HTML manipulation and formatting
 gem 'simple_form', '~> 3.0.2'
@@ -109,14 +107,14 @@ end
 
 group :test, :development do
   gem 'minitest'
-  gem 'rspec-rails', '~> 2.14.1'
+  gem 'rspec-rails', '~> 2.14.2'
   gem 'jasmine-rails', '~> 0.4.6'
   gem 'pry'
   gem 'awesome_print'
 end
 
 group :test do
-  gem 'fakeweb'
+  gem 'fakeweb', require: false
   gem 'launchy'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
