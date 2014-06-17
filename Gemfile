@@ -51,7 +51,7 @@ gem 'ezcrypto'
 gem 'pundit', '~> 0.2.3'
 
 # Email marketing
-gem 'catarse_monkeymail', '~> 0.1.3'
+gem 'catarse_monkeymail', '~> 0.1.4'
 
 # HTML manipulation and formatting
 gem 'simple_form', '~> 3.0.2'
@@ -114,6 +114,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'weekdays'
   gem 'fakeweb', require: false
   gem 'launchy'
   gem 'database_cleaner'
@@ -121,12 +122,11 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara',   '~> 2.2.1'
   gem 'coveralls', require: false
-  gem 'selenium-webdriver', '~> 2.39.0'
+  gem 'capybara-webkit'
 end
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'coffee-rails', '~> 4.0.1'
-gem 'compass-rails'
 gem 'uglifier'
 gem 'font-icons-rails', github: 'josemarluedke/font-icons-rails', branch: 'fix-svgz'
 gem 'zurb-foundation', '~> 4.3.2'
@@ -135,7 +135,3 @@ gem 'nprogress-rails'
 gem 'pjax_rails'
 gem 'initjs', '~> 2.1.2'
 gem 'remotipart', '~> 1.2.1'
-
-# FIXME: Not-anymore-on-development
-# Gems that are with 1 or more years on the vacuum
-gem 'weekdays'

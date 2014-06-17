@@ -24,7 +24,7 @@
                                    third_step_icon: 'et-rocket', third_step_title: t('.steps.third.title'), third_step_description: t('.steps.third.description')
 
         - for step in [:first, :second, :third]
-          .large-4.columns
+          .large-4.medium-4.columns
             .large-11.columns.large-centered.rounded-top
               .step
                 i[class="icon-#{steps.send("#{step}_step_icon")}"]
@@ -37,21 +37,21 @@
 
     section.who
       .row
-        .large-12.columns
-          - unless channel
+        - unless channel
+          .large-12.columns
             h2 = t('.who.title')
-            .large-4.columns
-              .large-8.columns.large-centered
-                i.icon-fa-building
-                h5 = t('.who.local-governments')
-            .large-4.columns
-              .large-10.columns.large-centered
-                i.icon-fa-heart
-                h5 = t('.who.nonprofits')
-            .large-4.columns
-              .large-10.columns.large-centered
-                i.icon-fa-home
-                h5 = t('.who.neighborhood-organizations')
+          .large-4.medium-4.columns
+            .large-10.columns.large-centered
+              i.icon-fa-building
+              h5 = t('.who.local-governments')
+          .large-4.medium-4.columns
+            .large-10.columns.large-centered
+              i.icon-fa-heart
+              h5 = t('.who.nonprofits')
+          .large-4.medium-4.columns
+            .large-10.columns.large-centered
+              i.icon-fa-home
+              h5 = t('.who.neighborhood-organizations')
         .large-11.columns.large-centered
           .row
             .large-12.columns
@@ -59,21 +59,20 @@
                 = channel.start_primary_content_html
               - else
                 p = t('.who.description')
-          .row
-            = link_to t('.get-started'), new_project_path, class: 'button large large-5 columns large-centered'
 
-            - if channel
-              .large-10.columns.large-centered
-                hr
+              = link_to t('.get-started'), new_project_path, class: 'button large large-5 medium-5 columns large-centered'
 
-              .large-12.columns
-                = channel.start_secondary_content_html
+              - if channel
+                .row
+                  .large-10.columns.large-centered
+                    hr
+
+                .large-12.columns
+                  = channel.start_secondary_content_html
 
     .row
       .large-10.columns.large-centered
         hr
-
-
 
     section.work
       .row

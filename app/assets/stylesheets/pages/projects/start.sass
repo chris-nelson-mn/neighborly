@@ -15,7 +15,6 @@
     text-align: center
     padding-bottom: +emCalc(30px)
     .rounded-top
-      margin-top: +emCalc(-45px)
       position: relative
       &:before
         width: 70%
@@ -24,7 +23,11 @@
         content: ' '
         background: white
         height: +emCalc(150px)
-        +border-radius(100%)
+    @media #{$medium}
+      margin-top: +emCalc(-45px)
+      .rounded-top
+        &:before
+          border-radius: 100%
     .step
       margin-top: +emCalc(-120px)
       i

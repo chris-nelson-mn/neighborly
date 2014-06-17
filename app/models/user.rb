@@ -46,13 +46,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :organization
   accepts_nested_attributes_for :unsubscribes, allow_destroy: true rescue puts "No association found for name 'unsubscribes'. Has it been defined yet?"
 
-  scope :contributions, -> {
-    where("id IN (
-      SELECT DISTINCT user_id
-      FROM contributions
-      WHERE contributions.state <> ALL(ARRAY['pending'::character varying::text, 'canceled'::character varying::text]))")
-  }
-
   scope :who_contributed_project, ->(project_id) {
     where("id IN (SELECT user_id FROM contributions WHERE contributions.state = 'confirmed' AND project_id = ?)", project_id)
   }
@@ -69,37 +62,10 @@ class User < ActiveRecord::Base
     where("id NOT IN (SELECT user_id FROM unsubscribes WHERE project_id = ?)", project_id)
   }
 
-  scope :by_email, ->(email){ where('email ~* ?', email) }
-  scope :by_payer_email, ->(email) {
-    where('EXISTS(
-      SELECT true
-      FROM contributions
-      JOIN payment_notifications ON contributions.id = payment_notifications.contribution_id
-      WHERE contributions.user_id = users.id AND payment_notifications.extra_data ~* ?)', email)
-  }
-  scope :by_name, ->(name){ where('users.name ~* ?', name) }
-  scope :by_id, ->(id){ where(id: id) }
-  scope :by_key, ->(key){ where('EXISTS(SELECT true FROM contributions WHERE contributions.user_id = users.id AND contributions.key ~* ?)', key) }
-  scope :has_credits, -> { joins(:user_total).where('user_totals.credits > 0') }
-  scope :has_not_used_credits_last_month, -> { has_credits.
-    where("NOT EXISTS (SELECT true FROM contributions b WHERE current_timestamp - b.created_at < '1 month'::interval AND b.credits AND b.state = 'confirmed' AND b.user_id = users.id)")
-  }
-  scope :order_by, ->(sort_field){ order(sort_field) }
-
   state_machine :profile_type, initial: :personal do
     state :personal, value: 'personal'
     state :organization, value: 'organization'
     state :channel, value: 'channel'
-  end
-
-  def self.send_credits_notification
-    has_not_used_credits_last_month.find_each do |user|
-      Notification.notify_once(
-        :credits_warning,
-        user,
-        {user_id: user.id}
-      )
-    end
   end
 
   def self.contribution_totals
@@ -146,7 +112,7 @@ class User < ActiveRecord::Base
   end
 
   def project_unsubscribes
-    contributed_projects.map do |p|
+    Project.contributed_by(self).map do |p|
       unsubscribes.updates_unsubscribe(p.id)
     end
   end
@@ -157,10 +123,6 @@ class User < ActiveRecord::Base
 
   def total_led
     projects_led.count
-  end
-
-  def contributed_projects
-    Project.contributed_by(self.id)
   end
 
   def password_required?
