@@ -43,6 +43,7 @@ Make sure you follow our [style guide](https://github.com/neighborly/guides/).
 To get everything working, you'll need to have these dependencies installed in your system:
 
 * ImageMagick >= 6.3.5
+* Qt ([to compile capybara webkit](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit))
 * PostgreSQL >= 9.3 (with [postgresql-contrib](http://www.postgresql.org/docs/9.3/static/contrib.html))
 * Redis >= 2.4
 * Ruby 2.1.1
@@ -65,6 +66,10 @@ $ rails runner db/development_seeds.rb
 ## Other Repositories
 
 Neighbor.ly consists of many separate services/gems, each with their own source code repository.
+
+### [Neighborly::Api](https://github.com/neighborly/neighborly-api) [![Build Status](https://travis-ci.org/neighborly/neighborly-api.png?branch=master)](https://travis-ci.org/neighborly/neighborly-api) [![Code Climate](https://codeclimate.com/github/neighborly/neighborly-api.png)](https://codeclimate.com/github/neighborly/neighborly-api)
+
+A Rails Engine that contains our API.
 
 ### [Neighborly::Admin](https://github.com/neighborly/neighborly-admin) [![Build Status](https://travis-ci.org/neighborly/neighborly-admin.png?branch=master)](https://travis-ci.org/neighborly/neighborly-admin) [![Code Climate](https://codeclimate.com/github/neighborly/neighborly-admin.png)](https://codeclimate.com/github/neighborly/neighborly-admin)
 

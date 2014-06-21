@@ -4,7 +4,8 @@ def check_dependencies!
   executable_list = {
     ImageMagick: 'convert',
     PostgreSQL:  'postgres',
-    Redis:       'redis-server',
+    QT:          'qmake',
+    Redis:       'redis-server'
   }
 
   executable_list.each do |dependency, executable|
@@ -24,6 +25,7 @@ else
 end
 
 system 'cp config/database.yml.example config/database.yml'
+system 'cp .env.example .env'
 system 'bundle install'
 system "bundle exec rake #{db_init_tasks}"
 
