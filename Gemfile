@@ -94,7 +94,10 @@ group :production do
   # Make heroku serve static assets and loggin with stdout
   gem 'rails_12factor'
 
-  # Monitoring with the new new relic
+  # Error monitoring
+  gem 'honeybadger'
+
+  # Performance monitoring with the new new relic
   gem 'newrelic_rpm', '3.6.9.171'
 end
 
